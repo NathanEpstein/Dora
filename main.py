@@ -14,8 +14,8 @@ class Dora:
     self.transformed_data = pd.DataFrame(new_data)
 
   def pre_process(self, config):
-    self.output = config['output'] #output column label
-    self.ordinal_features = config['ordinal_features'] #ordinal column labels
+    self.output = config['output']
+    self.ordinal_features = config['ordinal_features']
 
   def extract_feature(self, config):
     new_feature_column = map(
@@ -24,19 +24,17 @@ class Dora:
     )
     self.transformed_data[config['new_feature_name']] = new_feature_column
 
-  def _extract_ordinal_features(self):
-    for feature in self.ordinal_features:
-      # do something with the feature...
+  # def _extract_ordinal_features(self):
+  #   for feature in self.ordinal_features:
+  #     # do something with the feature...
 
   def _impute_missing_values(self):
-    # copy output column and replace it after imputing is applied
     output_copy = self.transformed_data[self.output].copy()
     imp = preprocessing.Imputer(copy = False)
     imp.fit_transform(self.transformed_data)
     self.transformed_data[self.output] = output_copy
 
   def _scale_input_values(self):
-    # copy output column and replace it after scaling is applied
     output_copy = self.transformed_data[self.output].copy()
     preprocessing.scale(self.transformed_data, copy = False)
     self.transformed_data[self.output] = output_copy
