@@ -18,8 +18,11 @@ class Dora:
     self.ordinal_features = config['ordinal_features'] #ordinal column labels
 
   def extract_feature(self, config):
-    # take new feature name, column to transform, mapping function
-    # apply map to column and add it to the df with the new name
+    new_feature_column = map(
+      config['mapper'],
+      self.transformed_data['feature_to_map']
+    )
+    self.transformed_data[config['new_feature_name']] = new_feature_column
 
   def _extract_ordinal_features(self):
     for feature in self.ordinal_features:
