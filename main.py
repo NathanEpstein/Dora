@@ -1,5 +1,6 @@
 import pandas as pd
 import numpy as np
+import matplotlib.pyplot as plt
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
@@ -62,3 +63,13 @@ class Dora:
     columns = list(self.data.columns)
     columns.remove(self.output)
     return self.data[columns]
+
+  def plot_feature(self, feature_name):
+    x = self.data[feature_name]
+    y = self.data[self.output]
+    fit = np.polyfit(x, y, deg = 1)
+    fig, ax = plt.subplots()
+    ax.plot(x, fit[1] + fit[0] * x)
+    ax.scatter(x, y)
+    ax.set_title("{0} vs. {1}".format(feature_name, self.output))
+    fig.show()
