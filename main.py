@@ -1,12 +1,13 @@
 import pandas as pd
+import numpy as np
 from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
 class Dora:
   def __init__(self, csv_file_path = None):
     if (csv_file_path != None):
-      self.input_data = pd.read_csv(csv_file_path)
-      self.data = self.input_data.copy()
+      self.initial_data = pd.read_csv(csv_file_path)
+      self.data = self.initial_data.copy()
 
   def extract_feature(self, config):
     new_feature_column = map(
@@ -52,7 +53,12 @@ class Dora:
     )
     del self.data[feature_name]
 
-  def set_training_and_validation():
+  def set_training_and_validation(self):
     training_rows = np.random.rand(len(self.data)) < 0.8
     self.training_data = self.data[training_rows]
     self.validation_data = self.data[~training_rows]
+
+  def input_data(self):
+    columns = list(self.data.columns)
+    columns.remove(self.output)
+    return self.data[columns]
