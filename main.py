@@ -1,3 +1,4 @@
+import math
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -73,3 +74,18 @@ class Dora:
     ax.scatter(x, y)
     ax.set_title("{0} vs. {1}".format(feature_name, self.output))
     fig.show()
+
+  def explore(self):
+    features = self.input_data().columns
+    row_count = math.floor(math.sqrt(len(features)))
+    col_count = math.ceil(len(features) / row_count)
+
+    for index, feature in enumerate(features):
+      plt.subplot("{0}{1}{2}".format(row_count, col_count, index))
+      x = self.data[feature]
+      y = self.data[self.output]
+      fit = np.polyfit(x, y, deg = 1)
+      plt.plot(x, fit[0] * x + fit[1])
+      plt.scatter(x, y)
+      plt.title("{0} vs. {1}".format(feature, self.output))
+    plt.show()
