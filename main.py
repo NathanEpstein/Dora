@@ -1,45 +1,58 @@
 import pandas as pd
-import math
 from sklearn import preprocessing
+from sklearn.feature_extraction import DictVectorizer
 
 class Dora:
   def __init__(self, csv_file_path = None):
     if (csv_file_path != None):
-      self.data = pd.DataFrame.from_csv(csv_file_path)
-      self.transformed_data = self.data
-
-  def data(self, new_data = None):
-    if (not new_data): return self.data
-    self.data = pd.DataFrame(new_data)
-    self.transformed_data = pd.DataFrame(new_data)
-
-  def pre_process(self, config):
-    self.output = config['output']
-    self.ordinal_features = config['ordinal_features']
+      self.input_data = pd.read_csv(csv_file_path)
+      self.data = self.input_data.copy()
 
   def extract_feature(self, config):
     new_feature_column = map(
       config['mapper'],
-      self.transformed_data['feature_to_map']
+      self.data[config['feature_to_map']]
     )
-    self.transformed_data[config['new_feature_name']] = new_feature_column
+    self.data[config['new_feature_name']] = list(new_feature_column)
 
-  # def _extract_ordinal_features(self):
-  #   for feature in self.ordinal_features:
-  #     # do something with the feature...
+  def impute_missing_values(self):
+    column_names = self.data.columns
+    output_copy = self.data[self.output].copy()
+    imp = preprocessing.Imputer()
+    imp.fit(self.data)
+    imputed_data = imp.transform(self.data)
+    self.data = pd.DataFrame(imputed_data)
+    self.data.columns = column_names
+    self.data[self.output] = output_copy
 
-  def _impute_missing_values(self):
-    output_copy = self.transformed_data[self.output].copy()
-    imp = preprocessing.Imputer(copy = False)
-    imp.fit_transform(self.transformed_data)
-    self.transformed_data[self.output] = output_copy
+  def scale_input_values(self):
+    column_names = self.data.columns
+    output_copy = self.data[self.output].copy()
+    scaled_data = preprocessing.scale(self.data)
+    self.data = pd.DataFrame(scaled_data)
+    self.data.columns = column_names
+    self.data[self.output] = output_copy
 
-  def _scale_input_values(self):
-    output_copy = self.transformed_data[self.output].copy()
-    preprocessing.scale(self.transformed_data, copy = False)
-    self.transformed_data[self.output] = output_copy
+  def extract_ordinal_feature(self, feature_name):
+    feature = self.data[feature_name]
+    feature_dictionaries = map(
+      lambda x: { str(feature_name): str(x) },
+      feature
+    )
+    vec = DictVectorizer()
+    one_hot_matrix = vec.fit_transform(feature_dictionaries).toarray()
+    one_hot_matrix = pd.DataFrame(one_hot_matrix)
+    one_hot_matrix.columns = vec.get_feature_names()
+    self.data = pd.concat(
+      [
+        self.data,
+        one_hot_matrix
+      ],
+      axis = 1
+    )
+    del self.data[feature_name]
 
-  def _set_training_and_validation():
-    training_rows = np.random.rand(len(self.transformed_data)) < 0.8
-    self.training_data = self.transformed_data[training_rows]
-    self.validation_data = self.transformed_data[~training_rows]
+  def set_training_and_validation():
+    training_rows = np.random.rand(len(self.data)) < 0.8
+    self.training_data = self.data[training_rows]
+    self.validation_data = self.data[~training_rows]
