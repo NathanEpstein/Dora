@@ -13,6 +13,10 @@ class Dora:
       self.initial_data = pd.read_csv(csv_file_path)
       self.data = self.initial_data.copy()
 
+  def remove_feature(self, feature_name):
+    del self.data[feature_name]
+    self._log("self.remove_feature('{0}')".format(feature_name))
+
   def extract_feature(self, config):
     new_feature_column = map(
       config['mapper'],
