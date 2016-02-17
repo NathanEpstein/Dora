@@ -56,7 +56,7 @@ class Dora:
       axis = 1
     )
     del self.data[feature_name]
-    self._log("self.extract_ordinal_feature({0})".format(feature_name))
+    self._log("self.extract_ordinal_feature('{0}')".format(feature_name))
 
   def set_training_and_validation(self):
     training_rows = np.random.rand(len(self.data)) < 0.8
