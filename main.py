@@ -79,9 +79,10 @@ class Dora:
     features = self.input_data().columns
     row_count = math.floor(math.sqrt(len(features)))
     col_count = math.ceil(len(features) / row_count)
+    figure = plt.figure(1)
 
     for index, feature in enumerate(features):
-      plt.subplot("{0}{1}{2}".format(row_count, col_count, index))
+      figure.add_subplot(row_count, col_count, index + 1)
       x = self.data[feature]
       y = self.data[self.output]
       fit = np.polyfit(x, y, deg = 1)
