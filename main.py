@@ -29,12 +29,9 @@ class Dora:
     self.data[self.output] = output_copy
 
   def scale_input_values(self):
-    column_names = self.data.columns
-    output_copy = self.data[self.output].copy()
-    scaled_data = preprocessing.scale(self.data)
-    self.data = pd.DataFrame(scaled_data)
-    self.data.columns = column_names
-    self.data[self.output] = output_copy
+    column_names = list(self.data.columns)
+    column_names.remove(self.output)
+    self.data[column_names] = preprocessing.scale(self.data[column_names])
 
   def extract_ordinal_feature(self, feature_name):
     feature = self.data[feature_name]
