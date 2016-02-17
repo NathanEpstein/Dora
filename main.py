@@ -7,6 +7,8 @@ from sklearn.feature_extraction import DictVectorizer
 
 class Dora:
   def __init__(self, csv_file_path = None):
+    self.logs = []
+    self.snapshots = {}
     if (csv_file_path != None):
       self.initial_data = pd.read_csv(csv_file_path)
       self.data = self.initial_data.copy()
@@ -17,6 +19,7 @@ class Dora:
       self.data[config['feature_to_map']]
     )
     self.data[config['new_feature_name']] = list(new_feature_column)
+    self._log("self.extract_feature({0})".format(config))
 
   def impute_missing_values(self):
     column_names = self.data.columns
@@ -27,11 +30,13 @@ class Dora:
     self.data = pd.DataFrame(imputed_data)
     self.data.columns = column_names
     self.data[self.output] = output_copy
+    self._log("self.impute_missing_values()")
 
   def scale_input_values(self):
     column_names = list(self.data.columns)
     column_names.remove(self.output)
     self.data[column_names] = preprocessing.scale(self.data[column_names])
+    self._log("self.scale_input_values()")
 
   def extract_ordinal_feature(self, feature_name):
     feature = self.data[feature_name]
@@ -51,6 +56,7 @@ class Dora:
       axis = 1
     )
     del self.data[feature_name]
+    self._log("self.extract_ordinal_feature({0})".format(feature_name))
 
   def set_training_and_validation(self):
     training_rows = np.random.rand(len(self.data)) < 0.8
@@ -87,3 +93,17 @@ class Dora:
       plt.scatter(x, y)
       plt.title("{0} vs. {1}".format(feature, self.output))
     plt.show()
+
+  def snapshot(self, name):
+    snapshot = {
+      "data": self.data.copy(),
+      "logs": self.logs.copy()
+    }
+    self.snapshots[name] = snapshot
+
+  def use_snapshot(self, name):
+    self.data = self.snapshots[name]["data"]
+    self.logs = self.snapshots[name]["logs"]
+
+  def _log(self, string):
+    self.logs.append(string)
