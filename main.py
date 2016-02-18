@@ -6,12 +6,22 @@ from sklearn import preprocessing
 from sklearn.feature_extraction import DictVectorizer
 
 class Dora:
-  def __init__(self, csv_file_path = None):
-    self.logs = []
+  def __init__(self, data = None, output = None):
     self.snapshots = {}
-    if (csv_file_path != None):
-      self.initial_data = pd.read_csv(csv_file_path)
+    self.logs = []
+    self.configure(data = data, output = output)
+
+  def configure(self, data = None, output = None):
+    if (type(output) is str or type(output) is int):
+      self.output = output
+    if (type(data) is str):
+      self.initial_data = pd.read_csv(data)
       self.data = self.initial_data.copy()
+      self.logs = []
+    if (type(data) is pd.DataFrame):
+      self.initial_data = data
+      self.data = self.initial_data.copy()
+      self.logs = []
 
   def remove_feature(self, feature_name):
     del self.data[feature_name]
