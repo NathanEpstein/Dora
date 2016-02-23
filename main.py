@@ -36,19 +36,14 @@ class Dora:
     self._log("self.extract_feature({0})".format(config))
 
   def impute_missing_values(self):
-    column_names = self.data.columns
-    output_copy = self.data[self.output].copy()
+    column_names = self._input_columns()
     imp = preprocessing.Imputer()
-    imp.fit(self.data)
-    imputed_data = imp.transform(self.data)
-    self.data = pd.DataFrame(imputed_data)
-    self.data.columns = column_names
-    self.data[self.output] = output_copy
+    imp.fit(self.data[column_names])
+    self.data[column_names] = imp.transform(self.data[column_names])
     self._log("self.impute_missing_values()")
 
   def scale_input_values(self):
-    column_names = list(self.data.columns)
-    column_names.remove(self.output)
+    column_names = self._input_columns()
     self.data[column_names] = preprocessing.scale(self.data[column_names])
     self._log("self.scale_input_values()")
 
@@ -78,9 +73,7 @@ class Dora:
     self.validation_data = self.data[~training_rows]
 
   def input_data(self):
-    columns = list(self.data.columns)
-    columns.remove(self.output)
-    return self.data[columns]
+    return self.data[self._input_columns()]
 
   def plot_feature(self, feature_name):
     x = self.data[feature_name]
@@ -121,3 +114,8 @@ class Dora:
 
   def _log(self, string):
     self.logs.append(string)
+
+  def _input_columns(self):
+    column_names = list(self.data.columns)
+    column_names.remove(self.output)
+    return column_names
