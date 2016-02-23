@@ -1,4 +1,5 @@
 pandas
 numpy
+scipy
 matplotlib
 sklearn
