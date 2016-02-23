@@ -10,9 +10,9 @@ setup(
   keywords = "exploratory data analysis",
   install_requires = [
     "matplotlib>=1.5.1",
-    "sklearn",
-    "scipy>=0.17.0",
-    "numpy",
     "pandas>=0.17.1",
+    "numpy",
+    "scipy>=0.17.0",
+    "sklearn",
   ]
 )
