@@ -1,7 +1,7 @@
 language: python
 python:
   - "3.4"
-sudo: true
+sudo: required
 before_install:
  - sudo apt-get install -qq python-numpy python-scipy
 install: python setup.py install
