@@ -54,8 +54,8 @@ class TestDora(unittest.TestCase):
     features = self.dora.data.columns
     self.assertTrue('D=left' in features and 'D=right' in features)
 
-  def test_input_data(self):
-    actual_input_columns = list(self.dora.input_data().columns)
+  def test_input_columns(self):
+    actual_input_columns = list(self.dora.input_columns())
     expected_input_columns = list(self.dora.data.columns)
     expected_input_columns.remove(self.dora.output)
     self.assertEqual(actual_input_columns, expected_input_columns)

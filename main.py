@@ -33,14 +33,14 @@ class Dora:
     self._log("self.extract_feature({0}, {1}, {2})".format(old_feat, new_feat, mapper))
 
   def impute_missing_values(self):
-    column_names = self._input_columns()
+    column_names = self.input_columns()
     imp = preprocessing.Imputer()
     imp.fit(self.data[column_names])
     self.data[column_names] = imp.transform(self.data[column_names])
     self._log("self.impute_missing_values()")
 
   def scale_input_values(self):
-    column_names = self._input_columns()
+    column_names = self.input_columns()
     self.data[column_names] = preprocessing.scale(self.data[column_names])
     self._log("self.scale_input_values()")
 
@@ -69,9 +69,6 @@ class Dora:
     self.training_data = self.data[training_rows]
     self.validation_data = self.data[~training_rows]
 
-  def input_data(self):
-    return self.data[self._input_columns()]
-
   def plot_feature(self, feature_name):
     x = self.data[feature_name]
     y = self.data[self.output]
@@ -81,6 +78,11 @@ class Dora:
     ax.scatter(x, y)
     ax.set_title("{0} vs. {1}".format(feature_name, self.output))
     fig.show()
+
+  def input_columns(self):
+    column_names = list(self.data.columns)
+    column_names.remove(self.output)
+    return column_names
 
   def explore(self):
     features = self.input_data().columns
@@ -111,8 +113,3 @@ class Dora:
 
   def _log(self, string):
     self.logs.append(string)
-
-  def _input_columns(self):
-    column_names = list(self.data.columns)
-    column_names.remove(self.output)
-    return column_names
