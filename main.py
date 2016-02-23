@@ -27,13 +27,10 @@ class Dora:
     del self.data[feature_name]
     self._log("self.remove_feature('{0}')".format(feature_name))
 
-  def extract_feature(self, config):
-    new_feature_column = map(
-      config['mapper'],
-      self.data[config['feature_to_map']]
-    )
-    self.data[config['new_feature_name']] = list(new_feature_column)
-    self._log("self.extract_feature({0})".format(config))
+  def extract_feature(self, old_feat, new_feat, mapper):
+    new_feature_column = map(mapper, self.data[old_feat])
+    self.data[new_feat] = list(new_feature_column)
+    self._log("self.extract_feature({0}, {1}, {2})".format(old_feat, new_feat, mapper))
 
   def impute_missing_values(self):
     column_names = self._input_columns()

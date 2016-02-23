@@ -17,11 +17,11 @@ class TestDora(unittest.TestCase):
     self.assertFalse('useless_feature' in self.dora.data.columns)
 
   def test_extract_feature(self):
-    self.dora.extract_feature({
-      "mapper": lambda x: x * 2,
-      "feature_to_map": 'useless_feature',
-      "new_feature_name": 'another_useless_feature'
-    })
+    self.dora.extract_feature(
+      'useless_feature',
+      'another_useless_feature',
+      lambda x: x * 2
+    )
 
     actual_column = list(self.dora.data['another_useless_feature'])
     expected_column = [2, 2, 2]
