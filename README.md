@@ -26,15 +26,15 @@ The library contains convenience functions for data cleaning, feature selection 
 
 The library uses and is intended to be a helpful addition to common Python data analysis tools such as pandas, scikit-learn, and matplotlib.
 
-<a name="install">
+<a name="install" />
 ## Installation
 
 ...
 
-<a name="use">
+<a name="use" />
 ## Usage
 
-<a name="config">
+<a name="config" />
 #### Reading Data & Configuration
 
 ```python
@@ -55,7 +55,7 @@ The library uses and is intended to be a helpful addition to common Python data 
 
 ```
 
-<a name="clean">
+<a name="clean" />
 #### Cleaning
 
 ```python
@@ -91,8 +91,9 @@ The library uses and is intended to be a helpful addition to common Python data 
 
 ```
 
-<a name="feature">
+<a name="feature" />
 #### Feature Selection & Extraction
+
 ```python
 # feature selection / removing a feature
 >>> dora.data
@@ -116,4 +117,26 @@ The library uses and is intended to be a helpful addition to common Python data 
 1  4 NaN  1       0        1
 2  7   8  2       1        0
 
+# extract a transformation of another feature
+>>> dora.extract_feature('C', '2C', lambda x: x * 2 )
+>>> dora.data
+   A   B  C  D=left  D=right  2C
+0  1   2  0       1        0   0
+1  4 NaN  1       0        1   2
+2  7   8  2       1        0   4
 ```
+
+<a name="visual" />
+#### Visualization
+
+```python
+# plot a single feature against the output variable
+dora.plot_feature('column-name')
+
+# render plots of each feature against the output variable
+dora.explore()
+```
+
+<a name="model" />
+#### Model Validation
+
