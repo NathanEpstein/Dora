@@ -1,5 +1,5 @@
 pandas
 numpy
-scipy
+scipy==0.9
 sklearn
 matplotlib
