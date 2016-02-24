@@ -27,7 +27,7 @@ The library uses and is intended to be a helpful addition to common Python data 
 <a name="install" />
 ## Installation
 
-'pip install Dora'
+'pip3 install Dora'
 
 <a name="use" />
 ## Usage
