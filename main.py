@@ -27,28 +27,20 @@ class Dora:
     del self.data[feature_name]
     self._log("self.remove_feature('{0}')".format(feature_name))
 
-  def extract_feature(self, config):
-    new_feature_column = map(
-      config['mapper'],
-      self.data[config['feature_to_map']]
-    )
-    self.data[config['new_feature_name']] = list(new_feature_column)
-    self._log("self.extract_feature({0})".format(config))
+  def extract_feature(self, old_feat, new_feat, mapper):
+    new_feature_column = map(mapper, self.data[old_feat])
+    self.data[new_feat] = list(new_feature_column)
+    self._log("self.extract_feature({0}, {1}, {2})".format(old_feat, new_feat, mapper))
 
   def impute_missing_values(self):
-    column_names = self.data.columns
-    output_copy = self.data[self.output].copy()
+    column_names = self.input_columns()
     imp = preprocessing.Imputer()
-    imp.fit(self.data)
-    imputed_data = imp.transform(self.data)
-    self.data = pd.DataFrame(imputed_data)
-    self.data.columns = column_names
-    self.data[self.output] = output_copy
+    imp.fit(self.data[column_names])
+    self.data[column_names] = imp.transform(self.data[column_names])
     self._log("self.impute_missing_values()")
 
   def scale_input_values(self):
-    column_names = list(self.data.columns)
-    column_names.remove(self.output)
+    column_names = self.input_columns()
     self.data[column_names] = preprocessing.scale(self.data[column_names])
     self._log("self.scale_input_values()")
 
@@ -77,11 +69,6 @@ class Dora:
     self.training_data = self.data[training_rows]
     self.validation_data = self.data[~training_rows]
 
-  def input_data(self):
-    columns = list(self.data.columns)
-    columns.remove(self.output)
-    return self.data[columns]
-
   def plot_feature(self, feature_name):
     x = self.data[feature_name]
     y = self.data[self.output]
@@ -91,6 +78,11 @@ class Dora:
     ax.scatter(x, y)
     ax.set_title("{0} vs. {1}".format(feature_name, self.output))
     fig.show()
+
+  def input_columns(self):
+    column_names = list(self.data.columns)
+    column_names.remove(self.output)
+    return column_names
 
   def explore(self):
     features = self.input_data().columns

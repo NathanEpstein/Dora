@@ -17,11 +17,11 @@ class TestDora(unittest.TestCase):
     self.assertFalse('useless_feature' in self.dora.data.columns)
 
   def test_extract_feature(self):
-    self.dora.extract_feature({
-      "mapper": lambda x: x * 2,
-      "feature_to_map": 'useless_feature',
-      "new_feature_name": 'another_useless_feature'
-    })
+    self.dora.extract_feature(
+      'useless_feature',
+      'another_useless_feature',
+      lambda x: x * 2
+    )
 
     actual_column = list(self.dora.data['another_useless_feature'])
     expected_column = [2, 2, 2]
@@ -54,8 +54,8 @@ class TestDora(unittest.TestCase):
     features = self.dora.data.columns
     self.assertTrue('D=left' in features and 'D=right' in features)
 
-  def test_input_data(self):
-    actual_input_columns = list(self.dora.input_data().columns)
+  def test_input_columns(self):
+    actual_input_columns = list(self.dora.input_columns())
     expected_input_columns = list(self.dora.data.columns)
     expected_input_columns.remove(self.dora.output)
     self.assertEqual(actual_input_columns, expected_input_columns)
