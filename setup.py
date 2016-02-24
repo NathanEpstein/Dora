@@ -14,5 +14,6 @@ setup(
     "numpy>=1.10.4",
     "scipy>=0.17.0",
     "sklearn",
-  ]
+  ],
+  packages = ['Dora']
 )

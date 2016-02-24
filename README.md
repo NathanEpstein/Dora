@@ -27,7 +27,7 @@ The library uses and is intended to be a helpful addition to common Python data 
 <a name="install" />
 ## Installation
 
-...
+'pip install Dora'
 
 <a name="use" />
 ## Usage
@@ -202,6 +202,11 @@ some_model.score(X, y)
 >>> dora.logs
 ["self.remove_feature('useless_feature')", "self.extract_ordinal_feature('D')", 'self.impute_missing_values()', 'self.scale_input_values()']
 ```
+
+<a name="test" />
+## Testing
+
+To run the test suite, simply run `python3 spec.py` from the `Dora` directory.
 
 <a name="contribute" />
 ## Contribute
