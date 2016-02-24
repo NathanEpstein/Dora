@@ -1,6 +1,4 @@
 # Dora
-<img src="path/to/testing/badge">
-
 Exploratory data analysis toolkit for Python.
 
 ## Contents
@@ -204,6 +202,11 @@ some_model.score(X, y)
 >>> dora.logs
 ["self.remove_feature('useless_feature')", "self.extract_ordinal_feature('D')", 'self.impute_missing_values()', 'self.scale_input_values()']
 ```
+
+<a name="test" />
+## Testing
+
+To run the test suite, simply run `python3 spec.py`
 
 <a name="contribute" />
 ## Contribute
