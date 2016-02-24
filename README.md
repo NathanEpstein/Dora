@@ -3,7 +3,7 @@ Exploratory data analysis toolkit for Python.
 
 ## Contents
 - [Summary](#summary)
-- [Installation](#install)
+- [Setup](#setup)
 - [Usage](#use)
   - [Reading Data & Configuration](#config)
   - [Cleaning](#clean)
@@ -24,10 +24,14 @@ The library contains convenience functions for data cleaning, feature selection 
 
 The library uses and is intended to be a helpful addition to common Python data analysis tools such as pandas, scikit-learn, and matplotlib.
 
-<a name="install" />
-## Installation
+<a name="setup" />
+## Setup
 
-`pip3 install Dora`
+````
+$ pip3 install Dora
+$ python3
+>>> from Dora import Dora
+```
 
 <a name="use" />
 ## Usage
