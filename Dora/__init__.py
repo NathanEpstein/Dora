@@ -1,1 +1,1 @@
-from main import Dora
+from .main import Dora
