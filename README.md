@@ -1,6 +1,4 @@
 # Dora
-<img src="path/to/testing/badge">
-
 Exploratory data analysis toolkit for Python.
 
 ## Contents
