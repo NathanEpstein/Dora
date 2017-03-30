@@ -16,7 +16,6 @@ Exploratory data analysis toolkit for Python.
 - [License](#license)
 
 <a name="summary"></a>
-
 ## Summary
 
 Dora is a Python library designed to automate the painful parts of exploratory data analysis.
@@ -26,22 +25,18 @@ The library contains convenience functions for data cleaning, feature selection 
 The library uses and is intended to be a helpful addition to common Python data analysis tools such as pandas, scikit-learn, and matplotlib.
 
 <a name="setup"></a>
-
 ## Setup
 
-````
+```python
 $ pip3 install Dora
 $ python3
 >>> from Dora import Dora
-
 ```
 
 <a name="use"></a>
-
 ## Usage
 
 <a name="config" ></a>
-
 #### Reading Data & Configuration
 
 ```python
@@ -62,7 +57,6 @@ $ python3
 ```
 
 <a name="clean" ></a>
-
 #### Cleaning
 
 ```python
@@ -98,7 +92,6 @@ $ python3
 ```
 
 <a name="feature" ></a>
-
 #### Feature Selection & Extraction
 
 ```python
@@ -134,7 +127,6 @@ $ python3
 ```
 
 <a name="visual" ></a>
-
 #### Visualization
 
 ```python
@@ -146,7 +138,6 @@ dora.explore()
 ```
 
 <a name="model" ></a>
-
 #### Model Validation
 
 ```python
@@ -167,7 +158,6 @@ some_model.score(X, y)
 ```
 
 <a name="version" ></a>
-
 #### Data Versioning
 
 ```python
@@ -216,13 +206,11 @@ some_model.score(X, y)
 ```
 
 <a name="test" ></a>
-
 ## Testing
 
 To run the test suite, simply run `python3 spec.py` from the `Dora` directory.
 
 <a name="contribute" ></a>
-
 ## Contribute
 
 Pull requests welcome! Feature requests / bugs will be addressed through issues on this repository. While not every feature request will necessarily be handled by me, maintaining a record for interested contributors is useful.
@@ -231,7 +219,6 @@ Additionally, feel free to submit pull requests which add features or address bu
 
 
 <a name="license" ></a>
-
 ## License
 
 **The MIT License (MIT)**
