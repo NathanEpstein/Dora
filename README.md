@@ -15,7 +15,8 @@ Exploratory data analysis toolkit for Python.
 - [Contribute](#contribute)
 - [License](#license)
 
-<a name="summary" />
+<a name="summary"></a>
+
 ## Summary
 
 Dora is a Python library designed to automate the painful parts of exploratory data analysis.
@@ -24,19 +25,23 @@ The library contains convenience functions for data cleaning, feature selection 
 
 The library uses and is intended to be a helpful addition to common Python data analysis tools such as pandas, scikit-learn, and matplotlib.
 
-<a name="setup" />
+<a name="setup"></a>
+
 ## Setup
 
 ````
 $ pip3 install Dora
 $ python3
 >>> from Dora import Dora
+
 ```
 
-<a name="use" />
+<a name="use"></a>
+
 ## Usage
 
-<a name="config" />
+<a name="config" ></a>
+
 #### Reading Data & Configuration
 
 ```python
@@ -57,7 +62,8 @@ $ python3
 
 ```
 
-<a name="clean" />
+<a name="clean" ></a>
+
 #### Cleaning
 
 ```python
@@ -93,7 +99,8 @@ $ python3
 
 ```
 
-<a name="feature" />
+<a name="feature" ></a>
+
 #### Feature Selection & Extraction
 
 ```python
@@ -128,7 +135,8 @@ $ python3
 2  7   8  2       1        0     4
 ```
 
-<a name="visual" />
+<a name="visual" ></a>
+
 #### Visualization
 
 ```python
@@ -139,7 +147,8 @@ dora.plot_feature('column-name')
 dora.explore()
 ```
 
-<a name="model" />
+<a name="model" ></a>
+
 #### Model Validation
 
 ```python
@@ -159,7 +168,8 @@ y = dora.validation_data[dora.output]
 some_model.score(X, y)
 ```
 
-<a name="version" />
+<a name="version" ></a>
+
 #### Data Versioning
 
 ```python
@@ -207,12 +217,14 @@ some_model.score(X, y)
 ["self.remove_feature('useless_feature')", "self.extract_ordinal_feature('D')", 'self.impute_missing_values()', 'self.scale_input_values()']
 ```
 
-<a name="test" />
+<a name="test" ></a>
+
 ## Testing
 
 To run the test suite, simply run `python3 spec.py` from the `Dora` directory.
 
-<a name="contribute" />
+<a name="contribute" ></a>
+
 ## Contribute
 
 Pull requests welcome! Feature requests / bugs will be addressed through issues on this repository. While not every feature request will necessarily be handled by me, maintaining a record for interested contributors is useful.
@@ -220,7 +232,8 @@ Pull requests welcome! Feature requests / bugs will be addressed through issues 
 Additionally, feel free to submit pull requests which add features or address bugs yourself.
 
 
-<a name="license" />
+<a name="license" ></a>
+
 ## License
 
 **The MIT License (MIT)**
