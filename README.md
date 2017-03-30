@@ -27,7 +27,7 @@ The library uses and is intended to be a helpful addition to common Python data 
 <a name="setup"></a>
 ## Setup
 
-```python
+```
 $ pip3 install Dora
 $ python3
 >>> from Dora import Dora
