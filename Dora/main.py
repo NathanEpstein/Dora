@@ -85,7 +85,7 @@ class Dora:
     return column_names
 
   def explore(self):
-    features = self.input_data().columns
+    features = self.input_columns()
     row_count = math.floor(math.sqrt(len(features)))
     col_count = math.ceil(len(features) / row_count)
     figure = plt.figure(1)
