@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
   name = "Dora",
-  version = "0.0.2",
+  version = "0.0.3",
   author = "Nathan Epstein",
   author_email = "ne2210@columbia.edu",
   description = ("Exploratory data analysis toolkit for Python"),
