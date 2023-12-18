@@ -13,7 +13,7 @@ setup(
     "pandas>=0.17.1",
     "numpy>=1.10.4",
     "scipy>=0.17.0",
-    "sklearn",
+    "scikit-learn",
   ],
   packages = ['Dora']
 )
