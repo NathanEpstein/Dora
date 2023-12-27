@@ -2,7 +2,7 @@ from setuptools import setup
 
 setup(
   name = "Dora",
-  version = "0.0.3",
+  version = "0.0.4",
   author = "Nathan Epstein",
   author_email = "ne2210@columbia.edu",
   description = ("Exploratory data analysis toolkit for Python"),
@@ -13,7 +13,7 @@ setup(
     "pandas>=0.17.1",
     "numpy>=1.10.4",
     "scipy>=0.17.0",
-    "sklearn",
+    "scikit-learn",
   ],
   packages = ['Dora']
 )
